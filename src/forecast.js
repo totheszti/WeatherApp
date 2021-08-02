@@ -46,7 +46,7 @@ function Forecast(props) {
     return (
         <div className="forecast">
             <div className="today-weather">
-                <h3>Keresés városra</h3>
+                <h3>További városok:</h3>
                 <div className="search-box">
                     <input
                         type="text"
@@ -73,7 +73,13 @@ function Forecast(props) {
                             <li>
                                 Hőmérséklet{" "}
                                 <span className="temp">
-                  {Math.round(weather.main.temp)}°c ({weather.weather[0].main})
+                  {Math.round(weather.main.temp)}°C ({weather.weather[0].main})
+                </span>
+                            </li>
+                            <li>
+                                Hőérzet{" "}
+                                <span className="temp">
+                  {Math.round(weather.main.feels_like)}°C
                 </span>
                             </li>
                             <li>

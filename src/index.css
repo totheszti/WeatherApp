@@ -34,7 +34,6 @@ body {
   width: 100%;
   padding: 15px;
   appearance: none;
-  background: none;
   border: none;
   outline: none;
   background-color: rgba(255,255,255,0.5);
@@ -161,7 +160,7 @@ h1 {
   position: absolute;
   bottom: 0;
   color: #fff;
-  width: 90%;
+  width: 100%;
   padding: 0 30px 10px 30px;
   font-family: "Oxygen", sans-serif;
 }
@@ -180,10 +179,9 @@ div#txt {
 }
 
 .temperature {
-  width: 50%;
   float: right;
   position: relative;
-  left: 10px;
+  left: 40px;
 }
 
 .temperature p {
@@ -210,11 +208,10 @@ div#txt {
 }
 
 .today-weather h3 {
-  text-transform: capitalize;
-  font-size: 50px;
+  font-size: 40px;
   color: #fff;
   width: 80%;
-  margin: 0 auto 10px;
+  margin: 30px auto 10px;
   padding-bottom: 10px;
   border-width: thin;
   border-bottom: 1px solid #eee;
@@ -241,8 +238,65 @@ div#txt {
   border-bottom: none;
 }
 
+.mb-icon {
+  margin: 15px;
+}
+
 .mb-icon h2 {
   color: #fff;
   font-size: 30px;
   font-weight: bold;
 }
+
+.bg-haze {
+  background-image: url('./assets/haze.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+
+.bg-clouds {
+  background-image: url('./assets/clouds.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-rain {
+  background-image: url('./assets/rain.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-drizzle{
+  background-image: url('./assets/drizzle.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-dust {
+  background-image: url('./assets/dust.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-fog {
+  background-image: url('./assets/fog.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-snow {
+   background-image: url('./assets/snow.jpg');
+   background-size: cover;
+   background-position: bottom;
+ }
+.bg-smoke {
+  background-image: url('./assets/smoke.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-tornado {
+  background-image: url('./assets/tornado.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+.bg-clear {
+  background-image: url('./assets/nice-weather.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+

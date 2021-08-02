@@ -3,7 +3,9 @@ import Clock from "react-live-clock";
 import Forecast from './forecast';
 import loader from './assets/fidgetspinner.gif'
 import apiKeys from "./apiKeys";
+import classNames from 'classnames';
 import ReactAnimatedWeather from "react-animated-weather";
+
 const dateBuilder = (d) => {
     let months = [
         "Január",
@@ -36,11 +38,13 @@ const dateBuilder = (d) => {
 
     return `${year} ${month} ${date} ( ${day} )`;
 };
+
 const defaults = {
     color: "white",
     size: 112,
     animate: true,
 };
+
 class Weather extends React.Component {
     state = {
         lat: undefined,
@@ -60,20 +64,19 @@ class Weather extends React.Component {
 
     componentDidMount() {
         if (navigator.geolocation) {
+            debugger
             this.getPosition()
-            //If user allow location service then will fetch data & send it to get-weather function.
                 .then((position) => {
                     this.getWeather(position.coords.latitude, position.coords.longitude);
                 })
                 .catch((err) => {
-                    //If user denied location service then standard location weather will le shown on basis of latitude & latitude.
                     this.getWeather(28.67, 77.22);
                     alert(
-                        "You have disabled location service. Allow 'This APP' to access your location. Your current location will be used for calculating Real time weather."
+                        "Engedélyezd a helymeghatározást!"
                     );
                 });
         } else {
-            alert("Geolocation not available");
+            alert("Nem elérhető helyzet");
         }
 
         this.timerID = setInterval(
@@ -93,7 +96,7 @@ class Weather extends React.Component {
     };
     getWeather = async (lat, lon) => {
         const api_call = await fetch(
-            `${apiKeys.base}weather?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKeys.key}`
+            `${apiKeys.base}weather?lat=${lat}&lon=${lon}&units=metric&&lang=hu&APPID=${apiKeys.key}`
         );
         const data = await api_call.json();
         this.setState({
@@ -111,45 +114,55 @@ class Weather extends React.Component {
         });
         switch (this.state.main) {
             case "Haze":
-                this.setState({ icon: "CLEAR_DAY" });
+                this.setState({icon: "CLEAR_DAY"});
                 break;
             case "Clouds":
-                this.setState({ icon: "CLOUDY" });
+                this.setState({icon: "CLOUDY"});
                 break;
             case "Rain":
-                this.setState({ icon: "RAIN" });
+                this.setState({icon: "RAIN"});
                 break;
             case "Snow":
-                this.setState({ icon: "SNOW" });
+                this.setState({icon: "SNOW"});
                 break;
             case "Dust":
-                this.setState({ icon: "WIND" });
+                this.setState({icon: "WIND"});
                 break;
             case "Drizzle":
-                this.setState({ icon: "SLEET" });
+                this.setState({icon: "SLEET"});
                 break;
             case "Fog":
-                this.setState({ icon: "FOG" });
+                this.setState({icon: "FOG"});
                 break;
             case "Smoke":
-                this.setState({ icon: "FOG" });
+                this.setState({icon: "FOG"});
                 break;
             case "Tornado":
-                this.setState({ icon: "WIND" });
+                this.setState({icon: "WIND"});
                 break;
             default:
-                this.setState({ icon: "CLEAR_DAY" });
+                this.setState({icon: "CLEAR_DAY"});
         }
     };
 
     render() {
         if (!this.state) {
             return <span>Töltődik...</span>;
-        }
-        else if (this.state.temperatureC) {
+        } else if (this.state.temperatureC) {
             return (
                 <React.Fragment>
-                    <div className="city">
+                    <div className={classNames('city', {
+                        'bg-clear': this.state.main === "Clear",
+                        'bg-haze': this.state.main === "Haze",
+                        'bg-clouds': this.state.main === "Clouds",
+                        'bg-rain': this.state.main === "Rain",
+                        'bg-snow': this.state.main === "Snow",
+                        'bg-dust': this.state.main === "Dust",
+                        'bg-drizzle': this.state.main === "Drizzle",
+                        'bg-fog': this.state.main === "Fog",
+                        'bg-smoke': this.state.main === "Smoke",
+                        'bg-tornado': this.state.main === "Tornado"
+                    })}>
                         <div className="title">
                             <h2>{this.state.city}</h2>
                             <h3>{this.state.country}</h3>
@@ -162,46 +175,55 @@ class Weather extends React.Component {
                                 size={defaults.size}
                                 animate={defaults.animate}
                             />
-                            <h2 className="text-white">{this.state.main}</h2>
                         </div>
                         <div className="date-time">
                             <div className="dmy">
                                 <div id="txt"></div>
                                 <div className="current-time">
-                                    <Clock format="HH:mm:ss" interval={1000} ticking={true} />
+                                    <Clock format="HH:mm:ss" interval={1000} ticking={true}/>
                                 </div>
                                 <div className="current-date">{dateBuilder(new Date())}</div>
                             </div>
                             <div className="temperature">
                                 <p>
-                                    {this.state.temperatureC}°<span>C</span>
+                                    {this.state.temperatureC}°C
                                 </p>
                             </div>
+                            <div style={{
+                                width: "100%",
+                                float: "right"
+                            }}>
+                            <div className="w-100">
+                                <p className="text-white" style={{ float: "right"}}>
+                                    Hőérzet: {this.state.feelsLike}°C
+                                </p>
+                            </div>
+                            {/*<div className="w-100">*/}
+                            {/*    <h3 className="text-white" style={{ float: "right"}}>*/}
+                            {/*        Páratartalom: {this.state.humidity}%*/}
+                            {/*    </h3>*/}
+                            {/*</div>*/}
+                            </div>
                         </div>
-                        <div className="feelsLike">
-                            <h3 className="text-white-50">
-                                {this.state.feelsLike}°<span>C</span>
-                            </h3>
-                        </div>
-                        <div className="humidity">
-                            <h3 className="text-white-50">
-                                {this.state.humidity}%<span> páratartalom</span>
-                            </h3>
-                        </div>
+
                     </div>
-                    <Forecast icon={this.state.icon} weather={this.state.main} />
+                    <Forecast icon={this.state.icon} weather={this.state.main}/>
                 </React.Fragment>
             );
         } else {
             return (
                 <React.Fragment>
-                    <img src={loader} style={{ width: "25%", align: "center", WebkitUserDrag: "none" }} />
-                    <h3 style={{ color: "white", fontSize: "22px", fontWeight: "600" }}>
-                        Tartózkodási hely keresés
-                    </h3>
-                    <h3 style={{ color: "white", marginTop: "10px" }}>
-                        A jelenlegi tartózkodási helyed rögtön megjelenik..Kis türelmet
-                    </h3>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "100%",
+                        height: "100%"
+                    }}>
+                        <h3 style={{color: "white", marginTop: "10px"}}>
+                            A jelenlegi tartózkodási helyed rögtön megjelenik... Kis türelmet
+                        </h3>
+                    </div>
                 </React.Fragment>
             );
         }
