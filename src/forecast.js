@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apiKeys from "./apiKeys";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from "bootstrap/js/src/button";
 
 
 function Forecast(props) {
@@ -18,7 +19,7 @@ function Forecast(props) {
             )
             .then((response) => {
                 setWeather(response.data);
-                setQuery("");
+                // setQuery("");
             })
             .catch(function (error) {
                 console.log(error);
@@ -58,8 +59,6 @@ function Forecast(props) {
                             onBlur={query !== "" ? search : ""}
                             value={query}
                         />
-                        { query === "" ?
-                            <FontAwesomeIcon icon="sync-alt" onClick={search}/> : ""}
                     </div>
                     <ul>
                         {typeof weather.main != "undefined" ? (
@@ -105,6 +104,8 @@ function Forecast(props) {
                             </li>
                         )}
                     </ul>
+                    { query !== "" && query === weather.name ?
+                        <div style={{width: "100%", display: "flex"}}><button style={ {backgroundColor: "green", padding: "10px", margin: "10px auto" }} onClick={search}>Újratöltés</button></div>  : ""}
                 </div>
             </div>
         );
