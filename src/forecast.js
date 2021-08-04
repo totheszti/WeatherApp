@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apiKeys from "./apiKeys";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from "bootstrap/js/src/button";
+import {Button} from "react-bootstrap";
 
 
 function Forecast(props) {
@@ -15,7 +15,7 @@ function Forecast(props) {
             .get(
                 `${apiKeys.base}weather?q=${
                     city != "[object Object]" ? city : query
-                }&units=metric&APPID=${apiKeys.key}`
+                }&units=metric&APPID=${localStorage.getItem('apiKey')}`
             )
             .then((response) => {
                 setWeather(response.data);
@@ -28,13 +28,6 @@ function Forecast(props) {
                 setError({message: "nem található", query: query});
             });
     };
-
-    // function checkTime(i) {
-    //     if (i < 10) {
-    //         i = "0" + i;
-    //     } // add zero in front of numbers < 10
-    //     return i;
-    // }
 
     const defaults = {
         color: "white",
@@ -105,7 +98,7 @@ function Forecast(props) {
                         )}
                     </ul>
                     { query !== "" && query === weather.name ?
-                        <div style={{width: "100%", display: "flex"}}><button style={ {backgroundColor: "green", padding: "10px", margin: "10px auto" }} onClick={search}>Újratöltés</button></div>  : ""}
+                        <div style={{width: "100%", display: "flex"}}><Button variant="success" style={ {padding: "10px", margin: "10px auto" }} onClick={search}>Újratöltés</Button></div>  : ""}
                 </div>
             </div>
         );

@@ -1,7 +1,6 @@
 import React from "react";
 import Clock from "react-live-clock";
 import Forecast from './forecast';
-import loader from './assets/fidgetspinner.gif'
 import apiKeys from "./apiKeys";
 import classNames from 'classnames';
 import ReactAnimatedWeather from "react-animated-weather";
@@ -32,8 +31,6 @@ const dateBuilder = (d) => {
         "Péntek",
         "Szombat",
     ];
-
-    let apiKey = "";
 
     let day = days[d.getDay()];
     let date = d.getDate();
@@ -74,7 +71,7 @@ class Weather extends React.Component {
                     this.getWeather(position.coords.latitude, position.coords.longitude);
                 })
                 .catch((err) => {
-                    this.getWeather(28.67, 77.22);
+                    this.getWeather(46.08333, 18.23333);
                     alert(
                         "Engedélyezd a helymeghatározást!"
                     );
@@ -100,7 +97,7 @@ class Weather extends React.Component {
     };
     getWeather = async (lat, lon) => {
         const api_call = await fetch(
-            `${apiKeys.base}weather?lat=${lat}&lon=${lon}&units=metric&&lang=hu&APPID=${apiKeys.key}`
+            `${apiKeys.base}weather?lat=${lat}&lon=${lon}&units=metric&&lang=hu&APPID=${localStorage.getItem('apiKey')}`
         );
 
         const data = await api_call.json();
