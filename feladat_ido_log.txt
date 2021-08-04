@@ -1,0 +1,27 @@
+Az API használatával jelenítse meg a következő adatokat:
+ Hőmérséklet
+ Időjárás (Rain, Sunny, stb.)
+ Hőérzet
+ Időjárásnak megfelelő design (icon, layout) --> 10 óra
+
+Induláskor egy popup-on kérje be a felhasználó saját API kulcsát. --> 10 óra
+
+Lokalizáció
+ Aktuális pozíció (Ez az alapértelmezett. Az alkalmazás ezzel
+induljon)
+ Kereső mező (város) --> 5 óra
+
+A keresés gombok használata nélküli megvalósítása.
+ Ha a kereső mező üres, akkor az aktuális pozíciót használja.
+ A keresés a beviteli mező elhagyása után induljon, vagy az Enter
+billentyű leütésére. --> 2 óra
+
+Reszponzív layout készítése (tablet, telefon, monitor). --> 4 óra
+
+Frissítés gomb, amivel újra lekérdezhetjük az adott város időjárási
+adatait, valamint egy óra, ami megmutatja, mikor frissültek utoljára az
+adatok. --> 2 óra
+
+Extra: 
+
+Hibakezelés --> 1 óra
