@@ -65,7 +65,6 @@ class Weather extends React.Component {
 
     componentDidMount() {
         if (navigator.geolocation) {
-            debugger
             this.getPosition()
                 .then((position) => {
                     this.getWeather(position.coords.latitude, position.coords.longitude);

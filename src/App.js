@@ -33,8 +33,6 @@ class App extends React.Component {
     };
 
     onSubmit(e) {
-        debugger
-
         e.preventDefault();
         let apiKey = this.state.apiKey;
 
