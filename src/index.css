@@ -94,7 +94,8 @@ code {
 .container {
   width: 65%;
   height: 80vh;
-  margin: 50px auto;
+  margin: 3% auto;
+  padding: 0;
   background-color: rgba(0, 0, 0, 0.73);
 }
 
@@ -223,6 +224,7 @@ div#txt {
 }
 
 .today-weather ul li {
+  list-style-type: none;
   width: 74%;
   margin: 0 auto;
   line-height: 39px;
