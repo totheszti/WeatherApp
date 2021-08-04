@@ -14,7 +14,6 @@ class App extends React.Component {
 
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -25,21 +24,16 @@ class App extends React.Component {
     }
 
     handleClose() {
+        let apiKey = this.state.apiKey;
+
+        localStorage.setItem('apiKey', apiKey);
+
         this.setState({show: false});
     };
 
     handleShow() {
         this.setState({show: true});
     };
-
-    onSubmit(e) {
-        e.preventDefault();
-        let apiKey = this.state.apiKey;
-
-        localStorage.setItem('apiKey', apiKey);
-
-        console.log(apiKey);
-    }
 
     render() {
         return (
@@ -56,8 +50,7 @@ class App extends React.Component {
                                     <input type="text" onChange={(c) => this.state.apiKey = c.target.value}/>
                                 </Modal.Body>
                                 <Modal.Footer>
-                                    <Button variant="secondary" onClick={this.handleClose}>Mégse</Button>
-                                    <Button variant="success" onClick={this.onSubmit}>Lekérdezés</Button>
+                                    <Button variant="success" onClick={this.handleClose}>Lekérdezés</Button>
                                 </Modal.Footer>
                             </Modal>
                         {this.state.apiKey !== "" ? (
